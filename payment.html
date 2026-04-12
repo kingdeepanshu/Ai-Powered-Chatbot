@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI SaaS Payment Test</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 100px;">
+
+  <h2>💰 Buy Tokens (₹100)</h2>
+  <button id="payBtn" onclick="payNow()" style="padding: 12px 20px; font-size: 16px; cursor:pointer;">
+    Pay Now
+  </button>
+
+  <script>
+    const BACKEND_URL = "http://localhost:5000";
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGI0OGQ0OWQ3Y2UwZjBlOWYxOWI0NiIsImlhdCI6MTc3NTk3ODcxNSwiZXhwIjoxNzc2NTgzNTE1fQ.UAH7HEibJU0-IBFUa5tWXgmPbYZTnPfB-Oixgt-f-6E"; // 🔥 replace this
+
+    async function payNow() {
+      try {
+        const res = await fetch(`${BACKEND_URL}/create-order`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${TOKEN}`
+          },
+          body: JSON.stringify({
+            amount: 100
+          })
+        });
+
+        const data = await res.json();
+        console.log("Order:", data);
+
+        const options = {
+          key: "rzp_test_SXUU1dfFg5JCRk",
+          amount: data.amount,
+          currency: "INR",
+          name: "Dev AI SaaS",
+          description: "Buy API Tokens",
+          order_id: data.orderId,
+
+          handler: async function (response) {
+            console.log("Payment Success:", response);
+            alert("Payment Successful 🎉");
+
+            await fetch(`${BACKEND_URL}/verify-payment`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${TOKEN}`
+              },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id
+              })
+            });
+          },
+
+          prefill: {
+            name: "Dev",
+            email: "king.obscura24@gmail.com"
+          },
+
+          theme: {
+            color: "#6366f1"
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+        document.getElementById("payBtn").disabled = true;
+
+      } catch (err) {
+        console.error(err);
+        alert("Payment Failed ❌");
+      }
+    }
+  </script>
+
+</body>
+</html>
