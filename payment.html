@@ -13,7 +13,9 @@
 
   <script>
     const BACKEND_URL = "http://localhost:5000";
-    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGI0OGQ0OWQ3Y2UwZjBlOWYxOWI0NiIsImlhdCI6MTc3NTk3ODcxNSwiZXhwIjoxNzc2NTgzNTE1fQ.UAH7HEibJU0-IBFUa5tWXgmPbYZTnPfB-Oixgt-f-6E"; // 🔥 replace this
+    // const BACKEND_URL = "https://ai-powered-chatbot-cz8h.onrender.com";
+
+    const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMTE1NTExYWM0MGRiOWJjNjIwY2E4YSIsImlhdCI6MTc3OTUyNDEyMiwiZXhwIjoxNzgwMTI4OTIyfQ.QO9GBTZ2Wswd33wbOS37NifEv1fqCjoug5CDmeawlXA"; // 🔥 replace this
 
     async function payNow() {
       try {
@@ -62,6 +64,26 @@
 
           theme: {
             color: "#6366f1"
+          },
+          config: {
+            display: {
+              blocks: {
+                upi: {
+                  name: "Pay using UPI",
+                  instruments: [
+                    {
+                      method: "upi"
+                    }
+                  ]
+                }
+              },
+
+              sequence: ["block.upi"],
+
+              preferences: {
+                show_default_blocks: false
+              }
+            }
           }
         };
 
