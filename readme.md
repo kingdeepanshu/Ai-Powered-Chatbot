@@ -1,213 +1,400 @@
-# 🚀 AI API SaaS Backend (Chat + API Keys + Payments)
+# 🚀 AI SaaS Backend Platform
 
-## 📌 Overview
-
-This project is a **production-ready AI SaaS backend** that allows users to generate API keys, consume AI chat APIs, and track usage with token-based billing.
-
-It solves the problem of building a **scalable AI backend with authentication, rate limiting, usage tracking, and payment integration**.
+### Prompt Engineering • Streaming AI APIs • Token Analytics • Payments
 
 ---
 
-## ⚙️ Features
+# 📌 Overview
 
-### 🔐 Authentication
+This project is a production-ready AI SaaS backend platform that enables developers to:
+
+* generate secure API keys
+* consume AI chat APIs
+* stream AI responses in real-time
+* create reusable AI prompt templates
+* track token usage & model analytics
+* estimate AI inference costs
+* manage API quotas with payment integration
+
+The system is designed to simulate real-world AI infrastructure used in modern AI developer platforms.
+
+It focuses on scalable backend architecture, observability, streaming systems, prompt engineering, and AI usage analytics.
+
+---
+
+# ⚙️ Features
+
+---
+
+# 🔐 Authentication
 
 * User signup & login with JWT
-* Secure password hashing (bcrypt)
-
-### 🔑 API Key System
-
-* Generate unique API keys (`sk_...`)
-* Hashed storage for security
-* Usage & quota tracking
-
-### 🤖 AI Chat System
-
-* Chat completion API
-* Streaming responses (SSE)
-* Context trimming (token-based memory control)
-* Function calling support (tools)
-
-### ⚡ Rate Limiting
-
-* Global limiter (100 requests / 15 min)
-* AI-specific limiter (10 req / min)
-
-### 📊 Usage Tracking
-
-* Token usage per request
-* Usage history stored in DB
-* Aggregated usage stats API
-
-### 💳 Payments (Razorpay)
-
-* Create payment orders
-* Webhook verification
-* Auto credit API usage on payment
-
-### 📡 Streaming Support
-
-* Real-time AI responses via Server-Sent Events (SSE)
-
-### 🧠 Smart Memory Handling
-
-* Token estimation
-* Automatic trimming of old messages
+* Secure password hashing using bcrypt
+* Token-based protected routes
+* Timing-safe authentication flow
 
 ---
 
-## 🧱 Tech Stack
+# 🔑 API Key Management
 
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB (Mongoose)
-* **Authentication:** JWT, bcryptjs
-* **AI Integration:** OpenAI SDK (Groq / compatible APIs)
-* **Payments:** Razorpay
-* **Security:** Crypto, Rate Limiting
-* **Streaming:** SSE (Server-Sent Events)
+* Generate secure API keys (`sk_...`)
+* SHA-256 hashed API key storage
+* API quota & usage tracking
+* API key activation/deactivation support
+* Per-user API key limits
 
 ---
 
-## 🔌 API Endpoints
+# 🤖 AI Chat System
 
-### 🔐 Auth
-
-POST /signup
-POST /login
-
----
-
-### 🔑 API Keys
-
-POST /create-key
-GET /my-keys
+* AI chat completion API
+* Real-time streaming responses using SSE
+* Context-aware conversation history
+* Automatic memory trimming based on token estimation
+* Multi-conversation support
 
 ---
 
-### 🤖 AI Chat
+# 🧠 Prompt Engineering System
 
-POST /chat
-POST /chat-stream
-
----
-
-### 📜 Chat History
-
-GET /history/:userId
+* Save reusable AI prompt templates
+* Dynamic variable injection (`{{variable}}`)
+* Run prompts directly through API
+* Prompt categories & tags
+* Prompt execution analytics
 
 ---
 
-### 📊 Usage
+# 📊 AI Usage Analytics
 
-GET /usage
-GET /usage-stats
-
----
-
-### 💳 Payments
-
-POST /create-order
-POST /webhook
+* Token usage tracking
+* Prompt tokens vs completion tokens
+* Model usage analytics
+* AI request latency tracking
+* Daily aggregated usage statistics
+* Cost estimation per AI request
 
 ---
 
-### 🩺 Health
+# 💳 Payment Integration (Razorpay)
 
-GET /health
-GET /
-
----
-
-## 📸 Screenshots
-
-[bleh bleh]
-[bleh bleh]
-[bleh bleh]
+* Razorpay order creation
+* Secure webhook verification
+* Automatic API quota upgrades after successful payment
+* Payment status persistence
 
 ---
 
-## ▶️ Demo
+# ⚡ Rate Limiting
 
-Live link: [bleh bleh]
+* Global request limiter
+* AI-specific request limiter
+* Prompt execution limiter
+* Abuse prevention middleware
 
 ---
 
-## 🧠 How it works
+# 📡 Streaming Support
+
+* Real-time AI streaming responses
+* Server-Sent Events (SSE)
+* Chunk-based incremental responses
+* Streaming-safe persistence handling
+
+---
+
+# 🧠 Smart Context Management
+
+* Token estimation system
+* Automatic conversation trimming
+* Optimized AI context window handling
+
+---
+
+# 🛡️ Security Features
+
+* JWT authentication
+* Hashed API keys
+* Webhook signature verification
+* Secure password hashing
+* Request validation
+* Rate limiting protection
+
+---
+
+# 🧱 Tech Stack
+
+| Category       | Tech                        |
+| -------------- | --------------------------- |
+| Backend        | Node.js, Express.js         |
+| Database       | MongoDB, Mongoose           |
+| Authentication | JWT, bcryptjs               |
+| AI Integration | OpenAI SDK, Groq API        |
+| Payments       | Razorpay                    |
+| Security       | Crypto, Express Rate Limit  |
+| Streaming      | Server-Sent Events (SSE)    |
+| Architecture   | Modular MVC-style structure |
+
+---
+
+# 📂 Project Structure
+
+```txt id="jlwm401"
+src/
+
+  config/
+  controllers/
+  helpers/
+  middleware/
+  models/
+  routes/
+
+server.js
+```
+
+---
+
+# 🔌 API Endpoints
+
+---
+
+# 🔐 Authentication
+
+| Method | Endpoint  |
+| ------ | --------- |
+| POST   | `/signup` |
+| POST   | `/login`  |
+
+---
+
+# 🔑 API Keys
+
+| Method | Endpoint      |
+| ------ | ------------- |
+| POST   | `/create-key` |
+| GET    | `/my-keys`    |
+
+---
+
+# 🤖 AI Chat
+
+| Method | Endpoint       |
+| ------ | -------------- |
+| POST   | `/chat`        |
+| POST   | `/chat-stream` |
+
+---
+
+# 🧠 Prompt Templates
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | `/prompts`         |
+| GET    | `/prompts`         |
+| DELETE | `/prompts/:id`     |
+| POST   | `/prompts/:id/run` |
+
+---
+
+# 📜 Chat History
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| GET    | `/history/:userId` |
+
+---
+
+# 📊 Usage & Analytics
+
+| Method | Endpoint              |
+| ------ | --------------------- |
+| GET    | `/usage`              |
+| GET    | `/usage-stats`        |
+| GET    | `/analytics/overview` |
+| GET    | `/analytics/models`   |
+
+---
+
+# 💳 Payments
+
+| Method | Endpoint        |
+| ------ | --------------- |
+| POST   | `/create-order` |
+| POST   | `/webhook`      |
+
+---
+
+# 🩺 Health Check
+
+| Method | Endpoint  |
+| ------ | --------- |
+| GET    | `/health` |
+| GET    | `/`       |
+
+---
+
+# 🧠 How It Works
 
 1. User signs up and logs in 🔐
-2. User generates an API key 🔑
+2. User generates API keys 🔑
 3. API key is used to access AI endpoints 🤖
-4. Chat messages are stored and trimmed intelligently 🧠
-5. Token usage is tracked per request 📊
-6. Rate limits prevent abuse ⚡
-7. Payments increase API usage quota 💳
-8. Webhook verifies payment securely 🔔
+4. Conversations are stored with smart context trimming 🧠
+5. AI responses can stream in real-time using SSE 📡
+6. Prompt templates can be saved and executed ⚡
+7. Token usage and latency are tracked 📊
+8. AI inference cost is estimated automatically 💰
+9. Rate limiting prevents abuse 🛡️
+10. Payments increase API usage quota 💳
+11. Webhooks securely verify payments 🔔
 
 ---
 
-## 🛠️ Run Locally
+# 📊 Analytics Supported
 
-### 1️⃣ Clone repo
+The platform tracks:
 
-```bash
+* Total token usage
+* Prompt tokens
+* Completion tokens
+* Estimated AI costs
+* Model-wise usage
+* Request counts
+* Average latency
+* Daily usage statistics
+
+---
+
+# 🛠️ Run Locally
+
+---
+
+## 1️⃣ Clone Repository
+
+```bash id="jlwm402"
 git clone <your-repo-url>
+
 cd project-folder
 ```
 
-### 2️⃣ Install dependencies
+---
 
-```bash
+## 2️⃣ Install Dependencies
+
+```bash id="jlwm403"
 npm install
 ```
 
-### 3️⃣ Setup environment variables
+---
 
-```env
+## 3️⃣ Setup Environment Variables
+
+Create `.env`
+
+```env id="jlwm404"
 PORT=5000
-MONGO_URI=your_mongo_uri
+
+MONGO_URI=your_mongodb_uri
+
 JWT_SECRET=your_jwt_secret
 
+OPENAI_API_KEY=your_api_key
+
+AI_BASE_URL=https://api.groq.com/openai/v1
+
 RAZORPAY_KEY_ID=your_key
+
 RAZORPAY_KEY_SECRET=your_secret
+
 RAZORPAY_WEBHOOK_SECRET=your_webhook_secret
 
-OPENAI_API_KEY=your_api_key
-AI_BASE_URL=https://api.groq.com/openai/v1
+ALLOWED_ORIGIN=http://localhost:5173
 ```
 
-### 4️⃣ Start server
+---
 
-```bash
+## 4️⃣ Start Server
+
+```bash id="jlwm405"
 npm start
 ```
 
----
+OR
 
-## ⚠️ Important Notes
-
-* Webhook uses raw body → do not change middleware order
-* API keys are hashed → cannot be retrieved again
-* Rate limiting is applied to prevent abuse
-* Streaming uses SSE → frontend must support it
+```bash id="jlwm406"
+node server.js
+```
 
 ---
 
-## 📌 Future Improvements
+# 📡 Streaming Example (SSE)
 
-* Redis caching ⚡
-* Stripe integration 💳
-* Dashboard UI 📊
-* Multi-model support 🤖
-* Team-based API keys 👥
+```txt id="jlwm407"
+event: message
+data: {"content":"Hello"}
+
+event: message
+data: {"content":" world"}
+
+event: done
+data: {}
+```
 
 ---
 
-## 👨‍💻 Author
+# 📸 Screenshots
 
-Dev Karan
+```txt id="jlwm408"
+[ Add dashboard screenshots here ]
+
+[ Add analytics screenshots here ]
+
+[ Add prompt system screenshots here ]
+```
 
 ---
 
-## ⭐ If you like this project
+# ▶️ Demo
+
+```txt id="jlwm409"
+Frontend Demo: [ add frontend link ]
+
+Backend API: [ add backend link ]
+```
+
+---
+
+# ⚠️ Important Notes
+
+* Webhook uses raw request body
+* API keys are hashed and cannot be recovered
+* SSE streaming requires frontend EventSource/fetch stream support
+* Rate limiting is enabled for AI endpoints
+* AI token costs are estimated based on model pricing
+* Context trimming prevents oversized AI requests
+
+---
+
+# 🚀 Future Improvements
+
+* Multi-model routing
+* Redis caching
+* Team workspaces
+* Stripe integration
+* AI playground UI
+* Vector database memory
+* Semantic prompt search
+* AI agent workflows
+* Docker deployment
+* Kubernetes scaling
+
+---
+
+# 👨‍💻 Author
+
+### Dev Karan
+
+---
+
+# ⭐ If you like this project
 
 Give it a star ⭐ and use it in your portfolio 🚀
